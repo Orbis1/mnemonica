@@ -1,4 +1,4 @@
-name: deploy storybook
+name: build storybook to gh-pages
 
 on:
   push:
@@ -27,9 +27,6 @@ jobs:
         npm install
         npm run build-storybook
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
     - name: Deploy to GitHub Pages
       uses: Cecilapp/GitHub-Pages-deploy@v3
       env:
