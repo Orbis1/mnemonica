@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import './cell.css';
+import React from 'react';
+import './styles.css';
 
 interface CellProps {
   selected?: boolean,
