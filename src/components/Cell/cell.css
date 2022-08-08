@@ -1,0 +1,11 @@
+.cell {
+  height: 32px;
+  width: 32px;
+  border: 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+.cell.selected {
+  background-color: aqua;
+}
