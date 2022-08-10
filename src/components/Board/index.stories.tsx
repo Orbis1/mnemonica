@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Grid } from '.';
+import { Board } from '.';
 
 export default {
-  title: 'Example/Grid',
-  component: Grid,
-} as ComponentMeta<typeof Grid>;
+  title: 'Example/Board',
+  component: Board,
+} as ComponentMeta<typeof Board>;
 
-const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
+const Template: ComponentStory<typeof Board> = (args) => <Board {...args} />;
 
 export const Default = Template.bind({});
 
