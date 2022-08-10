@@ -3,18 +3,22 @@ import { Cell } from '../Cell';
 import './styles.css';
 
 interface BoardProps {
-  size: number,
+  cells: number[],
+  onClick: (i: number) => void,
   style?: object
 }
 
-const Board = ({ size = 3}) => {
+const Board = ({ cells, onClick }: BoardProps) => {
+  const size = Math.sqrt(cells.length)
   let body = [];
-  let BoardStyle: object = { BoardTemplateColumns: `repeat(${size}, max-content)` };
-  for (let i = 0; i < size * size; i++) {
-    body.push(<Cell key={`cell-${i}`}/>)
+  let BoardStyle: object = { gridTemplateColumns: `repeat(${size}, max-content)` };
+
+  for (let i = 0; i < cells.length; i++) {
+    body.push(<Cell key = {`cell-${i}`} value = {cells[i]} onClick={() => onClick(i)}/>)
   }
+
   return (
-    <div className="Board-wrapper" style={BoardStyle} data-testid="Board-test">
+    <div className="board-wrapper" style={BoardStyle} data-testid="board-test">
       {body}
     </div>
   )

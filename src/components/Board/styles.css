@@ -1,4 +1,3 @@
 .board-wrapper {
-  display: Board;
-  Board-template-columns: repeat(3, max-content);
+  display: grid;
 }

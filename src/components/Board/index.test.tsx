@@ -7,7 +7,7 @@ describe("Cell", () => {
 
   it("should render", async () => {
     render(<Board />);
-    const Board = screen.getByTestId("Board-test");
+    const Board = screen.getByTestId("board-test");
     expect(Board).toBeInTheDocument();
   });
   

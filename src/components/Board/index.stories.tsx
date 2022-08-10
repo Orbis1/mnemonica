@@ -12,16 +12,6 @@ const Template: ComponentStory<typeof Board> = (args) => <Board {...args} />;
 
 export const Default = Template.bind({});
 
-Default.args = {};
-
-export const Two = Template.bind({});
-
-Two.args = {
-  size: 2,
-};
-
-export const Five = Template.bind({});
-
-Five.args = {
-  size: 5,
+Default.args = {
+  cells: [1,2,3,4],
 };

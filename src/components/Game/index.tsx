@@ -16,17 +16,24 @@ export class Game extends React.Component<GameProps, GameState> {
 
   constructor(props: GameProps) {
     super(props);
+    const cells = Array((props.initialLevel + 2)**2).fill(0);
     this.state = {
       level: props.initialLevel,
       size: props.initialLevel + 2,
-      cells: Array(this.state.size**2).fill(0), 
+      cells
     };
+  }
+
+  handleClick(i: number): void {
+    const newCells = this.state.cells.slice();
+    newCells[i] = newCells[i] === 1 ? 0 : 1;
+    this.setState({...this.state, cells: newCells});
   }
 
   render() {
     return (
       <div className = 'game' data-testid = 'game-test-id'>
-        <Board />
+        <Board cells = {this.state.cells} onClick={(i:number) => this.handleClick(i)}/>
       </div>
     );
   }
