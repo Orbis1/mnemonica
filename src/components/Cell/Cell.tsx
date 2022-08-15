@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'clsx';
 import './Cell.css';
 
 interface CellProps {
@@ -8,9 +9,9 @@ interface CellProps {
 }
 
 const Cell = ({ value, selected = false, onClick }: CellProps) => {
-  const classSelected = value === 1 ? " selected" : "";
+  console.log(cn("cell", selected && "selected"), value);
   return (
-    <div className = { "cell" + classSelected } data-testid="cell" onClick = {onClick}>{}</div>
+    <div className = {cn("cell", selected && "selected")} data-testid="cell" onClick = {onClick}>{}</div>
   );
 }
 

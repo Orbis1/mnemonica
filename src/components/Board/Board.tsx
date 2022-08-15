@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Cell } from '../Cell';
 import './Board.css';
 
@@ -10,16 +10,11 @@ interface BoardProps {
 
 const Board = ({ cells, onClick }: BoardProps) => {
   const size = Math.sqrt(cells.length)
-  let body = [];
-  let BoardStyle: object = { gridTemplateColumns: `repeat(${size}, max-content)` };
-
-  for (let i = 0; i < cells.length; i++) {
-    body.push(<Cell key = {`cell-${i}`} value = {cells[i]} onClick={() => onClick(i)}/>)
-  }
+  let style: CSSProperties = { gridTemplateColumns: `repeat(${size}, max-content)` };
 
   return (
-    <div className="board-wrapper" style={BoardStyle} data-testid="board-test">
-      {body}
+    <div className="board-wrapper" style={style} data-testid="board-test">
+      {cells.map((cell, i) => <Cell key = {i} value = {cell} selected = {cell===1} onClick={() => onClick(i)}/>)}
     </div>
   )
 }
