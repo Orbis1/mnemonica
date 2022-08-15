@@ -1,14 +1,14 @@
-import { Board } from ".";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { Board } from "./Board";
 
 describe("Cell", () => {
 
   it("should render", async () => {
-    render(<Board />);
-    const Board = screen.getByTestId("board-test");
-    expect(Board).toBeInTheDocument();
+    render(<Board cells = {[0, 1, 0, 1]} onClick={() => {}}/>);
+    const board = screen.getByTestId("board-test");
+    expect(board).toBeInTheDocument();
   });
   
 });

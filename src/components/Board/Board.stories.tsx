@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Board } from '.';
+import { Board } from './Board';
 
 export default {
   title: 'Example/Board',

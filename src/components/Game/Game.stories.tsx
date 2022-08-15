@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Game } from '.';
+import { Game } from './Game';
 
 export default {
   title: 'Example/Game',
