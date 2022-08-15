@@ -1,6 +1,8 @@
 import React from "react";
-import { Board } from '../Board';
 import equal from 'fast-deep-equal';
+import { Board } from '../Board';
+import { Stage } from '../Stage';
+import { Status } from '../Status';
 import './Game.css';
 
 interface GameProps {
@@ -30,6 +32,7 @@ export class Game extends React.Component<GameProps, GameState> {
       target,
       stage: 'remember'
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(i: number): void {
@@ -76,11 +79,11 @@ export class Game extends React.Component<GameProps, GameState> {
 
   render() {
     const { target, cells, stage } = this.state;
-    const win = equal(target, cells) && stage === 'guess';
-    console.log({ stage, data: `[${target.join(',')}] = [${cells.join(',')}]` })
     return (
       <div className = 'game' data-testid = 'game-test-id'>
-        <Board cells = {cells} onClick={(i:number) => this.handleClick(i)}/>
+        <Stage value={stage}/>
+        <Board cells={cells} onClick={this.handleClick}/>
+        <Status target={target} cells={cells} stage={stage} />
       </div>
     );
   }
