@@ -77,12 +77,10 @@ export class Game extends React.Component<GameProps, GameState> {
   render() {
     const { target, cells, stage } = this.state;
     const win = equal(target, cells) && stage === 'guess';
+    console.log({ stage, data: `[${target.join(',')}] = [${cells.join(',')}]` })
     return (
       <div className = 'game' data-testid = 'game-test-id'>
-        <p>{stage}</p>
         <Board cells = {cells} onClick={(i:number) => this.handleClick(i)}/>
-        <p>{win ? 'You are win!' : `...`}</p>
-        <p>{`[${target.join(',')}] = [${cells.join(',')}]`}</p>
       </div>
     );
   }

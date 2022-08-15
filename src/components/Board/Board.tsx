@@ -10,7 +10,7 @@ interface BoardProps {
 
 const Board = ({ cells, onClick }: BoardProps) => {
   const size = Math.sqrt(cells.length)
-  let style: CSSProperties = { gridTemplateColumns: `repeat(${size}, max-content)` };
+  let style: CSSProperties = { gridTemplateColumns: `repeat(${size}, auto)` };
 
   return (
     <div className="board-wrapper" style={style} data-testid="board-test">
