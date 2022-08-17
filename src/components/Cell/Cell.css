@@ -2,10 +2,22 @@
   min-height: 5em;
   min-width: 5em;
   border: 1px;
-  border-color: black;
+  border-color: rgba(0, 0, 0, 0.300);
   border-style: solid;
 }
 
 .cell.selected {
-  background-color: aqua;
+  background-color: yellow;
+}
+
+.cell.win {
+  background-color: green;
+}
+
+.cell.wrong {
+  background-color: crimson;
+}
+
+.cell:hover {
+  background-color: rgb(255, 255, 192);
 }

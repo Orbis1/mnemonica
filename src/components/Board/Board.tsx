@@ -1,19 +1,22 @@
 import React, { CSSProperties } from 'react';
 import { Cell } from '../Cell';
 import './Board.css';
+import cn from 'clsx';
 
 interface BoardProps {
   cells: number[],
   onClick: (i: number) => void,
-  style?: object
+  style?: object,
+  rotate: boolean,
+  rotateClass: string,
 }
 
-const Board = ({ cells, onClick }: BoardProps) => {
+const Board = ({ cells, onClick, rotate, rotateClass }: BoardProps) => {
   const size = Math.sqrt(cells.length)
-  let style: CSSProperties = { gridTemplateColumns: `repeat(${size}, auto)` };
+  const style: CSSProperties = { gridTemplateColumns: `repeat(${size}, auto)` };
 
   return (
-    <div className="board-wrapper" style={style} data-testid="board-test">
+    <div className={cn("board-wrapper", rotate && rotateClass, )} style={style} data-testid="board-test">
       {cells.map((cell, i) => <Cell key = {i} value = {cell} selected = {cell===1} onClick={() => onClick(i)}/>)}
     </div>
   )

@@ -3,6 +3,7 @@ import equal from 'fast-deep-equal';
 import { Board } from '../Board';
 import { Stage } from '../Stage';
 import { Status } from '../Status';
+import cn from 'clsx';
 import './Game.css';
 
 interface GameProps {
@@ -16,6 +17,7 @@ interface GameState {
   cells: number[];
   target: number[];
   stage: string;
+  rotation: string;
 }
 
 export class Game extends React.Component<GameProps, GameState> {
@@ -30,7 +32,8 @@ export class Game extends React.Component<GameProps, GameState> {
       size: props.initialLevel + 2,
       cells: target,
       target,
-      stage: 'remember'
+      stage: 'remember',
+      rotation: '',
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -63,26 +66,30 @@ export class Game extends React.Component<GameProps, GameState> {
   cleanBoard() {
     const { target, cells } = this.state;
     const newCells = cells.slice().fill(0);
+    const rotation = ['left', 'right'][Math.floor(Math.random()*2)];
     this.setState({
       ...this.state,
       target: target,
       cells: newCells,
-      stage: 'guess'
+      stage: 'guess',
+      rotation
     })
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.cleanBoard()
-    }, 5000);
+    }, 2000);
   }
 
   render() {
-    const { target, cells, stage } = this.state;
+    const { target, cells, stage, rotation } = this.state;
+    const rotate = stage === 'guess';
+    const rotateClass = `rotated-${rotation}`;
     return (
-      <div className = 'game' data-testid = 'game-test-id'>
+      <div className = 'game' data-testid='game-test-id'>
         <Stage value={stage}/>
-        <Board cells={cells} onClick={this.handleClick}/>
+        <Board cells={cells} onClick={this.handleClick} rotateClass={rotateClass} rotate={rotate}/>
         <Status target={target} cells={cells} stage={stage} />
       </div>
     );
