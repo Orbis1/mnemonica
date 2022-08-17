@@ -40,11 +40,27 @@ export class Game extends React.Component<GameProps, GameState> {
 
   handleClick(i: number): void {
     const { target, cells, stage } = this.state;
-    const win = equal(target, cells) && stage === 'guess';
-    if (win) return;
-    const newCells = this.state.cells.slice();
-    newCells[i] = newCells[i] === 1 ? 0 : 1;
-    this.setState({...this.state, cells: newCells});
+    const filled = cells.slice().map(i => i === 0 ? 0 : 1);
+    const lose = target[i] !== 1 && stage === 'guess';
+
+    if (['win','game over'].includes(stage)) return;
+
+    const newCells = cells.slice();
+    if (newCells[i] !== 0) return;
+    if (lose) {
+      newCells[i] = 3;
+      this.setState({...this.state, cells: newCells, stage: 'game over'});
+    } else {
+      newCells[i] = 1;
+      const win = equal(target, newCells);
+
+      if (win) {
+        const winCells = newCells.map(i => i === 0 ? 0 : 2)
+        this.setState({...this.state, cells: winCells, stage: 'win'});
+      } else {
+        this.setState({...this.state, cells: newCells});
+      }
+    }
   }
 
   getRandomInt(min: number, max: number) {
@@ -77,6 +93,7 @@ export class Game extends React.Component<GameProps, GameState> {
   }
 
   componentDidMount() {
+    console.log('game did mount')
     setTimeout(() => {
       this.cleanBoard()
     }, 2000);
@@ -84,7 +101,7 @@ export class Game extends React.Component<GameProps, GameState> {
 
   render() {
     const { target, cells, stage, rotation } = this.state;
-    const rotate = stage === 'guess';
+    const rotate = stage !== 'remember';
     const rotateClass = `rotated-${rotation}`;
     return (
       <div className = 'game' data-testid='game-test-id'>

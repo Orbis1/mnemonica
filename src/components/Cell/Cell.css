@@ -11,13 +11,9 @@
 }
 
 .cell.win {
-  background-color: green;
+  background-color: yellowgreen;
 }
 
 .cell.wrong {
-  background-color: crimson;
-}
-
-.cell:hover {
-  background-color: rgb(255, 255, 192);
+  background-color: coral;
 }

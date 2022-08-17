@@ -9,8 +9,9 @@ interface CellProps {
 }
 
 const Cell = ({ value, selected = false, onClick }: CellProps) => {
+  const style = [null, "selected", "win", "wrong"];
   return (
-    <div className = {cn("cell", selected && "selected")} data-testid="cell" onClick = {onClick}>{}</div>
+    <div className = {cn("cell", style[value])} data-testid="cell" onClick = {onClick}>{}</div>
   );
 }
 
