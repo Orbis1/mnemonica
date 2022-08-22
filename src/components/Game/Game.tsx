@@ -18,6 +18,7 @@ interface GameState {
   target: number[];
   stage: string;
   rotation: string;
+  count?: number;
 }
 
 export class Game extends React.Component<GameProps, GameState> {
@@ -43,7 +44,7 @@ export class Game extends React.Component<GameProps, GameState> {
     const filled = cells.slice().map(i => i === 0 ? 0 : 1);
     const lose = target[i] !== 1 && stage === 'guess';
 
-    if (['win','game over'].includes(stage)) return;
+    if (['win','game over', 'remember'].includes(stage)) return;
 
     const newCells = cells.slice();
     if (newCells[i] !== 0) return;
@@ -92,11 +93,35 @@ export class Game extends React.Component<GameProps, GameState> {
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return equal(this.props, nextProps);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.stage !== prevState.stage) {
+      let count = this.state?.count || 0;
+      count++;
+      this.setState({...this.state, count: count})
+      console.log('componentDidUpdate', count);
+    }
+    console.log('componentDidUpdate');
+  }
+
+  onMouseClick(event: MouseEvent) {
+    console.log(event);
+  }
+
   componentDidMount() {
-    console.log('game did mount')
+    console.log('game did mount', this.state)
+    document.addEventListener('click', this.onMouseClick);
     setTimeout(() => {
       this.cleanBoard()
     }, 2000);
+  }
+
+  componentWillUnmout() {
+    document.removeEventListener('click', this.onMouseClick);
+    console.log('game will unmount')
   }
 
   render() {
@@ -107,7 +132,7 @@ export class Game extends React.Component<GameProps, GameState> {
       <div className = 'game' data-testid='game-test-id'>
         <Stage value={stage}/>
         <Board cells={cells} onClick={this.handleClick} rotateClass={rotateClass} rotate={rotate}/>
-        <Status target={target} cells={cells} stage={stage} />
+        <Status target={target} cells={cells} stage={stage}/>
       </div>
     );
   }
