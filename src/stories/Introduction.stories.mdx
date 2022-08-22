@@ -25,9 +25,9 @@ import StackAlt from './assets/stackalt.svg';
     }
 
     .link-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr;
+      display: Board;
+      Board-template-columns: 1fr;
+      Board-template-rows: 1fr 1fr;
       row-gap: 10px;
     }
 
@@ -35,15 +35,15 @@ import StackAlt from './assets/stackalt.svg';
       .link-list {
         row-gap: 20px;
         column-gap: 20px;
-        grid-template-columns: 1fr 1fr;
+        Board-template-columns: 1fr 1fr;
       }
     }
 
     @media all and (-ms-high-contrast:none) {
     .link-list {
-        display: -ms-grid;
-        -ms-grid-columns: 1fr 1fr;
-        -ms-grid-rows: 1fr 1fr;
+        display: -ms-Board;
+        -ms-Board-columns: 1fr 1fr;
+        -ms-Board-rows: 1fr 1fr;
       }
     }
 

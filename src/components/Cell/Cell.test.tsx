@@ -1,26 +1,18 @@
-/*
-Cell is a square
-It can be selected
-It should change color on click
-It should change color to default on second click
-It can be market
-*/
-
-import { Cell } from "./Cell";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
+import { Cell } from "./Cell";
 
 describe("Cell", () => {
+  const mockClick = jest.fn() 
 
   it("should change color on click", async () => {
-    render(<Cell />);
+    render(<Cell value={1} onClick={mockClick}/>);
     const cell = screen.getByTestId("cell");
-    screen.debug();
     expect(cell).toBeInTheDocument();
     await userEvent.click(cell);
-    screen.debug();
+    expect(mockClick).toHaveBeenCalled();
+    expect(mockClick).toBeCalledTimes(1);
   });
-
 
 });
