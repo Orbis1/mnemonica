@@ -93,19 +93,19 @@ export class Game extends React.Component<GameProps, GameState> {
     })
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return equal(this.props, nextProps);
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return equal(this.props, nextProps);
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.stage !== prevState.stage) {
-      let count = this.state?.count || 0;
-      count++;
-      this.setState({...this.state, count: count})
-      console.log('componentDidUpdate', count);
-    }
-    console.log('componentDidUpdate');
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.stage !== prevState.stage) {
+  //     let count = this.state?.count || 0;
+  //     count++;
+  //     this.setState({...this.state, count: count})
+  //     console.log('componentDidUpdate', count);
+  //   }
+  //   console.log('componentDidUpdate');
+  // }
 
   onMouseClick(event: MouseEvent) {
     console.log(event);
