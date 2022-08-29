@@ -12,7 +12,8 @@ const Status = ({ target, cells, stage }: StatusProps) => {
   const win = equal(target, cells) && stage === 'guess';
   const data = `[${target.join(',')}] = [${cells.join(',')}]`;
   return (
-    <div className="status">{win ? 'You are win!' : data}</div>
+    // <div className="status">{win ? 'You are win!' : data}</div>
+    <div className="status">{ data}</div>
   );
 }
 
