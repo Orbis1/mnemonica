@@ -3,8 +3,14 @@ import equal from 'fast-deep-equal';
 import { Board } from '../Board';
 import { Stage } from '../Stage';
 import { Status } from '../Status';
-import cn from 'clsx';
 import './Game.css';
+
+enum gameStage {
+  REMEMBER = 'remember',
+  GUESS = 'guess',
+  WIN = 'win',
+  GAME_OVER = 'GAME_OVER'
+}
 
 interface GameProps {
   initialLevel: number;
@@ -16,7 +22,7 @@ interface GameState {
   size: number;
   cells: number[];
   target: number[];
-  stage: string;
+  stage: gameStage;
   rotation: string;
   count?: number;
 }
@@ -33,7 +39,7 @@ export class Game extends React.Component<GameProps, GameState> {
       size: props.initialLevel + 2,
       cells: target,
       target,
-      stage: 'remember',
+      stage: gameStage.REMEMBER,
       rotation: '',
     };
     this.handleClick = this.handleClick.bind(this);
@@ -42,22 +48,22 @@ export class Game extends React.Component<GameProps, GameState> {
   handleClick(i: number): void {
     const { target, cells, stage } = this.state;
     const filled = cells.slice().map(i => i === 0 ? 0 : 1);
-    const lose = target[i] !== 1 && stage === 'guess';
+    const lose = target[i] !== 1 && stage === gameStage.GUESS;
 
-    if (['win','game over', 'remember'].includes(stage)) return;
+    if ([gameStage.WIN, gameStage.GAME_OVER, gameStage.REMEMBER].includes(stage)) return;
 
     const newCells = cells.slice();
     if (newCells[i] !== 0) return;
     if (lose) {
       newCells[i] = 3;
-      this.setState({...this.state, cells: newCells, stage: 'game over'});
+      this.setState({...this.state, cells: newCells, stage: gameStage.GAME_OVER,});
     } else {
       newCells[i] = 1;
       const win = equal(target, newCells);
 
       if (win) {
         const winCells = newCells.map(i => i === 0 ? 0 : 2)
-        this.setState({...this.state, cells: winCells, stage: 'win'});
+        this.setState({...this.state, cells: winCells, stage: gameStage.WIN});
       } else {
         this.setState({...this.state, cells: newCells});
       }
@@ -88,24 +94,10 @@ export class Game extends React.Component<GameProps, GameState> {
       ...this.state,
       target: target,
       cells: newCells,
-      stage: 'guess',
+      stage: gameStage.GUESS,
       rotation
     })
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return equal(this.props, nextProps);
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.stage !== prevState.stage) {
-  //     let count = this.state?.count || 0;
-  //     count++;
-  //     this.setState({...this.state, count: count})
-  //     console.log('componentDidUpdate', count);
-  //   }
-  //   console.log('componentDidUpdate');
-  // }
 
   onMouseClick(event: MouseEvent) {
     console.log(event);
