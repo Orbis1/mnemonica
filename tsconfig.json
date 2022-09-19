@@ -1,6 +1,17 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true,
+    "moduleResolution": "node"
   },
+  "exclude": ["./src/stories"]
 }
