@@ -28,7 +28,7 @@ interface GameState {
   count?: number;
 }
 
-const Game: React.FC<GameProps> = ({ initialLevel, goal}): JSX.Element => {
+const Game: React.FC<GameProps> = ({ initialLevel, goal, onFinish}): JSX.Element => {
 
   const initialState: GameState = {
     level: initialLevel,
@@ -42,8 +42,9 @@ const Game: React.FC<GameProps> = ({ initialLevel, goal}): JSX.Element => {
   const [gameState, setGameState] = useState(initialState);
   const { cells, target, stage, rotation} = gameState;
 
+
   const handleClick = (state: GameState, i: number): void => {
-    const { target, cells, stage } = state;
+    const { target, cells, stage, level } = state;
     const lose = target[i] !== 1 && stage === gameStage.GUESS;
 
     if ([gameStage.WIN, gameStage.GAME_OVER, gameStage.REMEMBER].includes(stage)) return;
@@ -59,7 +60,7 @@ const Game: React.FC<GameProps> = ({ initialLevel, goal}): JSX.Element => {
 
       if (win) {
         const winCells = newCells.map(i => i === 0 ? 0 : 2)
-        setGameState({...gameState, cells: winCells, stage: gameStage.WIN});
+        setGameState({...gameState, cells: winCells, stage: gameStage.WIN, level: level + 1});
       } else {
         setGameState({...gameState, cells: newCells});
       }
