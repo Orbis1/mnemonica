@@ -35643,7 +35643,7 @@ var gameStage;
     gameStage["GAME_OVER"] = "game over";
 })(gameStage || (gameStage = {}));
 var Game = function (_a) {
-    var initialLevel = _a.initialLevel, goal = _a.goal;
+    var initialLevel = _a.initialLevel, goal = _a.goal, onFinish = _a.onFinish;
     var initialState = {
         level: initialLevel,
         size: initialLevel + 2,
@@ -35655,7 +35655,7 @@ var Game = function (_a) {
     var _b = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialState), gameState = _b[0], setGameState = _b[1];
     var cells = gameState.cells, target = gameState.target, stage = gameState.stage, rotation = gameState.rotation;
     var handleClick = function (state, i) {
-        var target = state.target, cells = state.cells, stage = state.stage;
+        var target = state.target, cells = state.cells, stage = state.stage, level = state.level;
         var lose = target[i] !== 1 && stage === gameStage.GUESS;
         if ([gameStage.WIN, gameStage.GAME_OVER, gameStage.REMEMBER].includes(stage))
             return;
@@ -35671,7 +35671,7 @@ var Game = function (_a) {
             var win = fast_deep_equal__WEBPACK_IMPORTED_MODULE_2___default()(target, newCells);
             if (win) {
                 var winCells = newCells.map(function (i) { return i === 0 ? 0 : 2; });
-                setGameState(__assign(__assign({}, gameState), { cells: winCells, stage: gameStage.WIN }));
+                setGameState(__assign(__assign({}, gameState), { cells: winCells, stage: gameStage.WIN, level: level + 1 }));
             }
             else {
                 setGameState(__assign(__assign({}, gameState), { cells: newCells }));
@@ -35968,10 +35968,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var root = react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot(document.querySelector('body'));
-var initialLevel = 2;
+var initialLevel = 0;
 var cells = Array(Math.pow((initialLevel + 2), 2)).fill(0);
 var goal = (0,_utils__WEBPACK_IMPORTED_MODULE_4__.randomize)(cells);
-root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)((react__WEBPACK_IMPORTED_MODULE_1___default().StrictMode), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Game__WEBPACK_IMPORTED_MODULE_3__.Game, { goal: goal, initialLevel: 0, onFinish: function () { return console.log('the end'); } }) }));
+root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)((react__WEBPACK_IMPORTED_MODULE_1___default().StrictMode), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Game__WEBPACK_IMPORTED_MODULE_3__.Game, { goal: goal, initialLevel: initialLevel, onFinish: function () { return console.log('the end'); } }) }));
 
 })();
 
