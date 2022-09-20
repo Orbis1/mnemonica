@@ -40738,21 +40738,11 @@ var __assign = (undefined && undefined.__assign) || function () {
 
 
 function Counter() {
-    // State: a counter value
-    // const [counter, setCounter] = useState(0);
-    // const { value: counter } = store.getState();
     var count = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(_counterSlice__WEBPACK_IMPORTED_MODULE_3__.selectCount);
     var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
     var _a = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('2'), incrementAmount = _a[0], setIncrementAmount = _a[1];
-    // Action: code that causes an update to the state when something happens
-    // const increment = () => {
-    // setCounter(prevCounter => prevCounter + 1);
-    // store.dispatch({ type: 'counter/increment' });
-    // };
-    // View: the UI definition
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Value: ", count, ' ', (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", __assign({ onClick: function () { return dispatch((0,_counterSlice__WEBPACK_IMPORTED_MODULE_3__.increment)()); } }, { children: "Increment" }))] }));
 }
-
 
 
 /***/ }),
@@ -40770,8 +40760,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "decrement": () => (/* binding */ decrement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "increment": () => (/* binding */ increment),
-/* harmony export */   "incrementAsync": () => (/* binding */ incrementAsync),
-/* harmony export */   "incrementByAmount": () => (/* binding */ incrementByAmount),
 /* harmony export */   "selectCount": () => (/* binding */ selectCount)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -40784,33 +40772,14 @@ var counterSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
     },
     reducers: {
         increment: function (state) {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
             state.value += 1;
         },
         decrement: function (state) {
             state.value -= 1;
         },
-        incrementByAmount: function (state, action) {
-            state.value += action.payload;
-        },
     },
 });
-var increment = (_a = counterSlice.actions, _a.increment), decrement = _a.decrement, incrementByAmount = _a.incrementByAmount;
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
-var incrementAsync = function (amount) { return function (dispatch) {
-    setTimeout(function () {
-        dispatch(incrementByAmount(amount));
-    }, 1000);
-}; };
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.counter.value)`
+var increment = (_a = counterSlice.actions, _a.increment), decrement = _a.decrement;
 var selectCount = function (state) { return state.counter.value; };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (counterSlice.reducer);
 
@@ -40917,22 +40886,19 @@ var Game = function (_a) {
                 setGameState(__assign(__assign({}, gameState), { cells: newCells }));
             }
         }
-        console.log(gameState);
     };
     var handle = handleClick.bind(null, gameState);
     var cleanBoard = function (state) {
         var target = state.target;
-        console.log({ target: target });
         var newCells = target.slice().fill(0);
         var rotation = ['left', 'right'][Math.floor(Math.random() * 2)];
         setGameState(__assign(__assign({}, gameState), { target: target, cells: newCells, stage: gameStage.GUESS, rotation: rotation }));
     };
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-        console.log('game did mount');
         setTimeout(function () {
             cleanBoard(gameState);
         }, 2000);
-        return function () { return console.log('game will unmount'); };
+        return function () { };
     }, []);
     var rotate = stage !== gameStage.REMEMBER;
     var rotateClass = "rotated-".concat(rotation);
@@ -41874,7 +41840,7 @@ var root = react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot(document.que
 var initialLevel = 0;
 var cells = Array(Math.pow((initialLevel + 2), 2)).fill(0);
 var goal = (0,_utils__WEBPACK_IMPORTED_MODULE_4__.randomize)(cells);
-root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, __assign({ store: _store__WEBPACK_IMPORTED_MODULE_6__["default"] }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)((react__WEBPACK_IMPORTED_MODULE_1___default().StrictMode), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Game__WEBPACK_IMPORTED_MODULE_3__.Game, { goal: goal, initialLevel: initialLevel, onFinish: function () { return console.log('the end'); } }) }) })));
+root.render((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_5__.Provider, __assign({ store: _store__WEBPACK_IMPORTED_MODULE_6__["default"] }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)((react__WEBPACK_IMPORTED_MODULE_1___default().StrictMode), { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Game__WEBPACK_IMPORTED_MODULE_3__.Game, { goal: goal, initialLevel: initialLevel, onFinish: function () { } }) }) })));
 
 })();
 
