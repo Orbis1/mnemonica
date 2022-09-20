@@ -80,14 +80,12 @@ const Game: React.FC<GameProps> = ({
         setGameState({ ...gameState, cells: newCells });
       }
     }
-    console.log(gameState);
   };
 
   const handle = handleClick.bind(null, gameState);
 
   const cleanBoard = (state: GameState) => {
     const { target } = state;
-    console.log({ target });
     const newCells = target.slice().fill(0);
     const rotation = ['left', 'right'][Math.floor(Math.random() * 2)];
     setGameState({
@@ -100,11 +98,10 @@ const Game: React.FC<GameProps> = ({
   };
 
   useEffect(() => {
-    console.log('game did mount');
     setTimeout(() => {
       cleanBoard(gameState);
     }, 2000);
-    return () => console.log('game will unmount');
+    return () => {};
   }, []);
 
   const rotate = stage !== gameStage.REMEMBER;

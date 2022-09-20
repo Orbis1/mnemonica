@@ -14,11 +14,7 @@ const goal = randomize(cells);
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Game
-        goal={goal}
-        initialLevel={initialLevel}
-        onFinish={() => console.log('the end')}
-      />
+      <Game goal={goal} initialLevel={initialLevel} onFinish={() => {}} />
     </React.StrictMode>
   </Provider>
 );
